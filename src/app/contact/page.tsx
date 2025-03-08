@@ -42,7 +42,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="m-auto mt-16 w-full max-w-2xl space-y-8 px-8">
+    <div className="m-auto mt-12 w-full max-w-2xl space-y-8 px-8">
       <div className="space-y-2 text-center">
         <h1 className="text-3xl font-bold">Get in Touch</h1>
         <p className="text-gray-500 dark:text-gray-400">
