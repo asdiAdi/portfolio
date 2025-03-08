@@ -3,7 +3,20 @@ import Link from "next/link";
 import MenuTechStack from "@/app/_components/menu-tech-stack";
 
 // TODO: integrate this data to cms
-const LANGUAGES = ["javascript", "typescript"];
+const LANGUAGES = ["javascript", "typescript", "c sharp", "python"];
+const FRONTEND_FRAMEWORKS = ["react", "next", "vite", "tailwind", "sass", "nx"];
+const FRONTEND_UI = ["shadcn", "daisyui", "bootstrap", "material"];
+const BACKEND_FRAMEWORKS = ["express", "nest", "next", "net"];
+const DATABASE_ORM = [
+  "postgresql",
+  "supabase",
+  "dynamodb",
+  "typeorm",
+  "prisma",
+];
+const CLOUD = ["aws"];
+const CMS = ["strapi"];
+const OTHERS = ["docker", "git"];
 
 export default function Home() {
   return (
@@ -54,11 +67,22 @@ export default function Home() {
       </div>
 
       {/* Tech */}
-      <div className="mt-20">
-        <h2 className="mb-8 text-center font-mono text-2xl font-bold">
-          Techstack
-        </h2>
+      <div className="mt-20 space-y-4">
+        <h2 className="text-center font-mono text-2xl font-bold">Techstack</h2>
         <MenuTechStack techStack={LANGUAGES} title="Languages" />
+        <MenuTechStack
+          techStack={FRONTEND_FRAMEWORKS}
+          title="Frontend Frameworks"
+        />
+        <MenuTechStack techStack={FRONTEND_UI} title="Frontend UI Libraries" />
+        <MenuTechStack
+          techStack={BACKEND_FRAMEWORKS}
+          title="Backend Frameworks"
+        />
+        <MenuTechStack techStack={DATABASE_ORM} title="Database & ORMs" />
+        <MenuTechStack techStack={CLOUD} title="Cloud" />
+        <MenuTechStack techStack={CMS} title="CMS" />
+        <MenuTechStack techStack={OTHERS} title="Others" />
       </div>
     </div>
   );

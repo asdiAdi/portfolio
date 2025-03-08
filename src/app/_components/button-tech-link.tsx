@@ -11,15 +11,20 @@ type ButtonTechLinkProps = Omit<LinkProps, "href"> & {
   className?: string;
 };
 
-function Tech({ className, text }: { className: string; text: string }) {
-  const SVG = useMemo(
-    () =>
-      dynamic(() => import(`../../../public/brand-icons/${text}`), {
+// TEMPORARY
+// TODO: CMS
+function Tech({ className, tech }: { className: string; tech: string }) {
+  const SVG = useMemo(() => {
+    try {
+      return dynamic(() => import(`../../../public/brand-icons/${tech}`), {
         ssr: false,
         loading: () => <div className="size-6" />,
-      }),
-    [text],
-  );
+      });
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  }, [tech]);
 
   return (
     <div
@@ -28,8 +33,8 @@ function Tech({ className, text }: { className: string; text: string }) {
         className,
       )}
     >
-      <SVG />
-      <span className="text-md font-bold text-white uppercase">{text}</span>
+      {SVG && <SVG />}
+      <span className="text-md font-bold text-white uppercase">{tech}</span>
     </div>
   );
 }
@@ -44,7 +49,7 @@ export default function ButtonTechLink({
       // href={`/projects?tech=${tech}`}
       href="/projects"
       className={cn(
-        "group relative inline-flex w-40 cursor-pointer items-center justify-center overflow-hidden bg-background px-6 py-3 font-medium transition duration-300 ease-out",
+        "group relative inline-flex w-38 cursor-pointer items-center justify-center overflow-hidden bg-background px-6 py-3 font-medium transition duration-300 ease-out",
         className,
       )}
       {...props}
@@ -63,10 +68,28 @@ export default function ButtonTechLink({
       >
         <Tech
           className={cn({
-            "bg-slate-800": tech === "javascript",
-            "bg-blue-500": tech === "typescript",
+            "bg-slate-800": ["javascript", "react", "nx"].includes(tech),
+            "bg-blue-500": ["typescript", "prisma", "strapi"].includes(tech),
+            "bg-green-600": tech === "c sharp",
+            "bg-cyan-700": ["python", "postgresql"].includes(tech),
+            "bg-zinc-900": ["next", "shadcn"].includes(tech),
+            "bg-indigo-500": tech === "vite",
+            "bg-teal-500": tech === "tailwind",
+            "bg-pink-400": tech === "sass",
+            "bg-sky-700": tech === "material",
+            "bg-violet-700": tech === "daisyui",
+            "bg-purple-600": tech === "bootstrap",
+            "bg-gray-600": tech === "express",
+            "bg-rose-600": tech === "nest",
+            "bg-purple-900": tech === "net",
+            "bg-emerald-400": tech === "supabase",
+            "bg-indigo-600": tech === "dynamodb",
+            "bg-orange-600": tech === "typeorm",
+            "bg-amber-500": tech === "aws",
+            "bg-sky-500": tech === "docker",
+            "bg-red-500": tech === "git",
           })}
-          text={tech}
+          tech={tech}
         />
       </span>
       <span className="invisible relative">Button</span>
